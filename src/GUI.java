@@ -91,6 +91,17 @@ public class GUI extends JFrame{
         panelPost.add(txtPost);
         txtPost.setColumns(10);
 
+        btnPin = new JButton("Pin ");
+        btnUnpin = new JButton("Unpin ");
+
+        btnClear = new JButton("Clear ");
+        btnShake = new JButton("Shake ");
+        panelPost.add(btnPin);
+        panelPost.add(btnUnpin);
+
+        panelPost.add(btnClear);
+        panelPost.add(btnShake);
+
         //Output section
         panelOutput = new JScrollPane();
         panelOutput.setBorder(new EmptyBorder(10, 0, 10, 10));
@@ -105,6 +116,17 @@ public class GUI extends JFrame{
         txtOutput.setLineWrap(true);
         txtOutput.setBorder(new BevelBorder(BevelBorder.LOWERED));
         panelOutput.setViewportView(txtOutput);
+
+        //Connect Button
+        btnConnect = new JButton("Connect ");
+        btnConnect.setEnabled(false);
+        panelHeader.add(btnConnect, BorderLayout.WEST);
+
+        //Disconnect Button
+        btnDisconnect = new JButton("Disconnect");
+//        btnDisconnect.addActionListener();
+        btnDisconnect.setEnabled(false);
+        panelHeader.add(btnDisconnect, BorderLayout.EAST);
     }
 
     JPanel panelParent;
@@ -131,4 +153,12 @@ public class GUI extends JFrame{
     JLabel lbPost;
     JTextField txtPost;
 
+    JButton btnDisconnect;
+    JButton btnConnect;
+
+    JButton btnPin;
+    JButton btnUnpin;
+
+    JButton btnClear;
+    JButton btnShake;
 }
