@@ -25,22 +25,23 @@ public class GUI extends JFrame{
         panelParent.add(panelHeader, BorderLayout.NORTH);
         panelHeader.setLayout(new BorderLayout(0, 0));
 
-
+//Header
         lblTitle = new JLabel("Stickynote Board");
-        lblTitle.setFont(new Font("Serif", Font.PLAIN, 14));
+        lblTitle.setFont(new Font("Serif", Font.PLAIN, 20));
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         panelHeader.add(lblTitle, BorderLayout.CENTER);
 
 
         panelContent = new JPanel();
         panelParent.add(panelContent, BorderLayout.CENTER);
-        panelContent.setLayout(new GridLayout(1, 0, 0, 0));
+        panelContent.setLayout(new GridLayout(3, 0, 0, 0));
 
         panelLeft = new JPanel();
         panelLeft.setBorder(new EmptyBorder(10, 10, 10, 0));
         panelContent.add(panelLeft);
         panelLeft.setLayout(new BorderLayout(0, 0));
 
+        //Request Section
         panelRequest = new JPanel();
         panelRequest.setBorder(new EmptyBorder(10, 0, 10, 0));
         panelLeft.add(panelRequest, BorderLayout.NORTH);
@@ -55,7 +56,7 @@ public class GUI extends JFrame{
         panelFields.setBorder(new EmptyBorder(10, 0, 10, 0));
         panelLeft.add(panelFields, BorderLayout.CENTER);
         panelFields.setLayout(new BoxLayout(panelFields, BoxLayout.Y_AXIS));
-
+// IP ADDRESS Section
         panelIP = new JPanel();
         panelFields.add(panelIP);
         panelIP.setLayout(new GridLayout(0, 2, 0, 0));
@@ -65,22 +66,45 @@ public class GUI extends JFrame{
 
         txtIP = new JTextField();
         panelIP.add(txtIP);
-        txtIP.setColumns(1);
+        txtIP.setColumns(10);
+// PORT Section
+        panelPort = new JPanel();
+        panelFields.add(panelPort);
+        panelPort.setLayout(new GridLayout(0, 2, 0, 0));
 
+        lbPort = new JLabel("Port:");
+        panelPort.add(lbPort);
 
-        panelRight = new JScrollPane();
-        panelRight.setBorder(new EmptyBorder(10, 0, 10, 10));
-        panelContent.add(panelRight);
+        txtPort = new JTextField();
+        panelPort.add(txtPort);
+        txtPort.setColumns(10);
+
+//       POST Section
+        panelPost = new JPanel();
+        panelFields.add(panelPost);
+        panelPost.setLayout(new GridLayout(0, 2, 0, 0));
+
+        lbPost = new JLabel("Data For POST:");
+        panelPost.add(lbPost);
+
+        txtPost = new JTextField();
+        panelPost.add(txtPost);
+        txtPost.setColumns(10);
+
+        //Output section
+        panelOutput = new JScrollPane();
+        panelOutput.setBorder(new EmptyBorder(10, 0, 10, 10));
+        panelContent.add(panelOutput);
 
         lblOutput = new JLabel("Output");
         lblOutput.setBorder(new EmptyBorder(0, 0, 10, 0));
-        panelRight.setColumnHeaderView(lblOutput);
+        panelOutput.setColumnHeaderView(lblOutput);
 
         txtOutput = new JTextArea();
         txtOutput.setEditable(false);
         txtOutput.setLineWrap(true);
         txtOutput.setBorder(new BevelBorder(BevelBorder.LOWERED));
-        panelRight.setViewportView(txtOutput);
+        panelOutput.setViewportView(txtOutput);
     }
 
     JPanel panelParent;
@@ -95,8 +119,16 @@ public class GUI extends JFrame{
     JPanel panelIP;
     JLabel labelIP;
     JTextField txtIP;
-    JScrollPane panelRight;
+    JScrollPane panelOutput;
     JLabel lblOutput;
     JTextArea txtOutput;
+
+    JPanel panelPort;
+    JLabel lbPort;
+    JTextField txtPort;
+
+    JPanel panelPost;
+    JLabel lbPost;
+    JTextField txtPost;
 
 }
