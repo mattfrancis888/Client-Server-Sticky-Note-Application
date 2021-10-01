@@ -10,14 +10,8 @@ public class Server {
         if (args.length == 0) {
             System.out.println("Defaulting to the port 5555");
             port = 5555;
-        } else {
-            try {
-                port = new Integer(argv[0]).intValue();
-            } catch (Exception e) {
-                System.out.println("Invalid port format, defaulting to the 5555");
-                port = 5555;
-            }
-        }
+        } else
+            port = Integer.parseInt(args[0]);
 
         // Establish the listen socket.
         ServerSocket socket = new ServerSocket(port);
