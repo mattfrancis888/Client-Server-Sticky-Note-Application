@@ -5,6 +5,17 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class StickyNote {
+    @Override
+    public String toString() {
+        return "COLOR: " + color +
+                "\n x: " + x +
+                "\n y : " + y +
+                "\n Name: " + name +
+                "\n height: " + height +
+                "\n width: " + width + "\r\n";
+
+    }
+
     public String getColor() {
         return color;
     }

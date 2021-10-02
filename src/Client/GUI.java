@@ -48,25 +48,22 @@ public class GUI extends JFrame {
 
         private void btnSubmitHandler(ActionEvent e) {
                 if (clientHandler.isConnected()) {
-                        if (e.getSource() == btnGet) {
-                                System.out.println("BTN GET CLICKED");
-                        } else if(e.getSource() == btnPost) {
-                                System.out.println("BTN POST CLICKED");
-                        }
+
                         try {
                                 System.out.println("isConnected");
                                 // Handle Title
                                 String TITLE = txtTITLE.getText().trim();
 
                                 // Handle All Get request
-                                txtOutput.setText(clientHandler.sendMessage(Request.GET, "test"));
+                                if (e.getSource() == btnGet) {
+                                        System.out.println("BTN GET CLICKED");
+                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, "test"));
+                                } else if(e.getSource() == btnPost) {
+                                        System.out.println("BTN POST CLICKED");
+                                        txtOutput.setText(clientHandler.sendMessage(Request.POST, "test"));
+                                }
                                 connectFlag = false;
                                 return;
-//                                if (comboBoxRequests.getSelectedItem() == Request.GET && checkboxAll.isSelected()) {
-//                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, "", "", "", "", 0, true, checkboxBibtex.isSelected()));
-//                                        return;
-//                                }
-
 
                         } catch (NumberFormatException exception) {
                                 JOptionPane.showMessageDialog(this, "Invalid ISBN", "Error", JOptionPane.ERROR_MESSAGE);

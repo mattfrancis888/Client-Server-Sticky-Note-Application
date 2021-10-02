@@ -86,19 +86,16 @@ public class HttpRequest extends Thread {
     //handle stuff
     private String handlePost(String[] data) {
         String message;
-//        StickyNote stickyNote = new StickyNote();
-//        for (String line : data) {
-//            line = line.trim();
-//            String[] words = line.split(" ");
-//            String value;
-//            switch (words[0]) {
-//                case "COLOR":
-//                    if (Util.findByISBN(bookEntries, words[1]) != null) {
-//                        message = "ERROR: Book already exists";
-//                        return message;
-//                    }
-//                    stickyNote.setColor(words[1]);
-//                    break;
+        StickyNote stickyNote = new StickyNote();
+        for (String line : data) {
+            line = line.trim();
+            String[] words = line.split(" ");
+            String value;
+            System.out.println("HANDLE POST: " + words[0] + " ");
+            switch (words[0]) {
+                case "COLOR":
+                    stickyNote.setColor("TEST COLOR");
+                    break;
 //                case "X":
 //                    value = line.substring(words[0].length()).trim();
 //                    stickyNote.setX(value);
@@ -117,12 +114,14 @@ public class HttpRequest extends Thread {
 //                case "HEIGHT":
 //                    stickyNote.setHeight(Integer.parseInt(words[1]));
 //                    break;
-//                default:
-//                    break;
-//            }
-//        }
-        message = "-----Successfully added-----\n";
-//        bookEntries.add(bookEntry);
+                default:
+                    break;
+            }
+        }
+        stickyNoteEntries.add(stickyNote);
+        message = "-----Successfully added-----\n" + stickyNoteEntries.get(
+                stickyNoteEntries.size() - 1);
+
         return message;
     }
 

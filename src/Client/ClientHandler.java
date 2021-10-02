@@ -37,7 +37,7 @@ public class ClientHandler {
     private String processRequest(Request request, String color) {
         String requestData = request.name() + "\r\n";
 
-            requestData += "color " + color;
+            requestData += "COLOR " + color;
 
         return requestData;
     }
