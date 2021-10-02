@@ -57,6 +57,7 @@ public class HttpRequest extends Thread {
         try {
             //Read everything line by line from the input
             line = in.readLine();
+            System.out.println(line);
             while (line != null) {
                 inMessage = "";
                 if (line.equals("ping")) { //COME BACK
