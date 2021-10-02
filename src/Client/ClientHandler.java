@@ -25,19 +25,28 @@ public class ClientHandler {
         }
     }
 
+    public boolean isConnected() {
+        try {
+            out.println("ping");
+            return in.readLine().equals("pong");
+        } catch (NullPointerException | IOException e) {
+            return false;
+        }
+    }
+
     private String processRequest(Request request, String color) {
         String requestData = request.name() + "\r\n";
-        if (all) {
-            requestData += "ALL";
-        } else {
+
             requestData += "color " + color;
-        }
+
         return requestData;
     }
 
     public String sendMessage(Request request, String color) throws IOException {
         String requestData = processRequest(request, color);
-        out.println(requestData + "\r\n\\EOF");
+        System.out.println("sendMessage: "  + requestData + "color is: " + color);
+//        out.println(requestData + "\r\n\\EOF");
+        out.println("test" + "\r\n\\EOF");
         String response = "";
         String line = in.readLine();
         while (line != null && !line.contains("\\EOF")) {

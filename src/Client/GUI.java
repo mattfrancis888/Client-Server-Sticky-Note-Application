@@ -4,16 +4,73 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 public class GUI extends JFrame {
-
+        private final ClientHandler clientHandler;
         public GUI() {
-                renderContent();
+
                 setTitle("Stickynote Board");
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 setBounds(100, 100, 800, 800);
+                clientHandler = new ClientHandler();
+                renderContent();
                 setVisible(true);
         }
+
+        private void connectDialog() {
+                txtIPAddress = new JTextField("127.0.0.1");
+                txtPort = new JTextField("3000");
+                Object[] fields = {"IP Address", txtIPAddress, "Port Number", txtPort};
+                Object[] options = {"Connect", "Exit"};
+                int option = JOptionPane.showOptionDialog(this, fields, "Connect to Server", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                switch (option) {
+                        case JOptionPane.YES_OPTION:
+                                try {
+                                        clientHandler.connect(txtIPAddress.getText(),
+                                                Integer.parseInt(txtPort.getText()));
+                                        btnDisconnect.setEnabled(true);
+                                } catch (NumberFormatException exception) {
+                                        JOptionPane.showMessageDialog(this, "Invalid Port Number", "Error", JOptionPane.ERROR_MESSAGE);
+                                        connectDialog();
+                                } catch (IOException exception) {
+                                        JOptionPane.showMessageDialog(this, "Unable to connect please check IP/Port", "Error", JOptionPane.ERROR_MESSAGE);
+                                        connectDialog();
+                                }
+                                break;
+                        case JOptionPane.NO_OPTION:
+                                System.exit(0);
+                                break;
+                }
+        }
+
+        private void btnSubmitHandler(ActionEvent e) {
+                if (clientHandler.isConnected()) {
+                        try {
+                                System.out.println("isConnected");
+                                // Handle Title
+                                String TITLE = txtTITLE.getText().trim();
+
+                                // Handle All Get request
+                                txtOutput.setText(clientHandler.sendMessage(Request.GET, "test"));
+                                return;
+//                                if (comboBoxRequests.getSelectedItem() == Request.GET && checkboxAll.isSelected()) {
+//                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, "", "", "", "", 0, true, checkboxBibtex.isSelected()));
+//                                        return;
+//                                }
+
+
+                        } catch (NumberFormatException exception) {
+                                JOptionPane.showMessageDialog(this, "Invalid ISBN", "Error", JOptionPane.ERROR_MESSAGE);
+                        } catch (IOException exception) {
+                                exception.printStackTrace();
+                        }
+                } else {
+                        connectDialog();
+                }
+        }
+
 
         private void renderContent() {
                 panelParent = new JPanel();
@@ -77,6 +134,18 @@ public class GUI extends JFrame {
                 panelPort.add(txtPort);
                 txtPort.setColumns(10);
 
+                //Color
+                panelTITLE = new JPanel();
+                panelFields.add(panelTITLE);
+                panelTITLE.setLayout(new GridLayout(0, 2, 0, 0));
+
+                lblTITLE = new JLabel("TITLE:");
+                panelTITLE.add(lblTITLE);
+
+                txtTITLE = new JTextField();
+                panelTITLE.add(txtTITLE);
+                txtTITLE.setColumns(10);
+
                 // POST Section
                 panelPost = new JPanel();
                 panelFields.add(panelPost);
@@ -90,6 +159,7 @@ public class GUI extends JFrame {
                 txtPost.setColumns(10);
 
                 btnGet = new JButton("Get ");
+                btnGet.addActionListener(this::btnSubmitHandler);
                 btnPin = new JButton("Pin ");
                 btnUnpin = new JButton("Unpin ");
 
@@ -166,4 +236,12 @@ public class GUI extends JFrame {
 
         JButton btnClear;
         JButton btnShake;
+
+        JTextField txtIPAddress;
+
+
+        JTextField txtTITLE;
+        JLabel lblTITLE;
+        JPanel panelTITLE;
+
 }

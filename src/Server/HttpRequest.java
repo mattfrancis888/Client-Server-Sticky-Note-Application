@@ -37,8 +37,8 @@ public class HttpRequest extends Thread {
         switch (request) {
             case "POST":
                 return handlePost(data);
-//            case "GET":
-//                return handleGet(data);
+            case "GET":
+                return handleGet(data);
 //            case "PIN":
 //                return handlePin(data);
 //            case "UNPIN":
@@ -57,8 +57,9 @@ public class HttpRequest extends Thread {
         try {
             //Read everything line by line from the input
             line = in.readLine();
-            System.out.println(line);
+
             while (line != null) {
+                System.out.println("LISTEN VAL" + line);
                 inMessage = "";
                 if (line.equals("ping")) { //COME BACK
                     outMessage = "pong";
@@ -123,6 +124,14 @@ public class HttpRequest extends Thread {
         message = "-----Successfully added-----\n";
 //        bookEntries.add(bookEntry);
         return message;
+    }
+
+
+    private String handleGet(String[] data) {
+        StringBuilder message = new StringBuilder();
+        System.out.println("handleGet" + data);
+
+        return message.toString();
     }
 
 }
