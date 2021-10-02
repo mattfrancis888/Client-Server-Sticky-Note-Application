@@ -128,7 +128,24 @@ public class HttpRequest extends Thread {
 
     private String handleGet(String[] data) {
         StringBuilder message = new StringBuilder();
-        System.out.println("handleGet" + data);
+
+        for (String line : data) {
+
+            line = line.trim();
+            String[] words = line.split(" ");
+            String value = line.substring(words[0].length()).trim();
+            System.out.println("HANDLE GET: " + words[0] + " ");
+            switch (words[0]) {
+                case "COLOR":
+                    if (stickyNoteEntries.size() == 0)
+                        return "No colors found.";
+                    for (StickyNote stickyNote : stickyNoteEntries) {
+                        message.append(stickyNote.toString());
+                        message.append("\r\n");
+                    }
+                    return message.toString();
+            }
+        }
 
         return message.toString();
     }
