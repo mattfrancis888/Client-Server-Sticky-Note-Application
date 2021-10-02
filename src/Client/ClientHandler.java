@@ -44,8 +44,9 @@ public class ClientHandler {
 
     public String sendMessage(Request request, String color) throws IOException {
         String requestData = processRequest(request, color);
-        System.out.println("sendMessage: "  + requestData + "color is: " + color);
-//        out.println(requestData + "\r\n\\EOF");
+//        System.out.println("sendMessage: "  + requestData + "color is: " + color);
+        System.out.println("sendMessage: "  + requestData);
+       out.println(requestData + "\r\n\\EOF");
         out.println("test" + "\r\n\\EOF");
         String response = "";
         String line = in.readLine();

@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class GUI extends JFrame {
         private final ClientHandler clientHandler;
+        private boolean connectFlag = true;
         public GUI() {
 
                 setTitle("Stickynote Board");
@@ -47,6 +48,11 @@ public class GUI extends JFrame {
 
         private void btnSubmitHandler(ActionEvent e) {
                 if (clientHandler.isConnected()) {
+                        if (e.getSource() == btnGet) {
+                                System.out.println("BTN GET CLICKED");
+                        } else if(e.getSource() == btnPost) {
+                                System.out.println("BTN POST CLICKED");
+                        }
                         try {
                                 System.out.println("isConnected");
                                 // Handle Title
@@ -54,6 +60,7 @@ public class GUI extends JFrame {
 
                                 // Handle All Get request
                                 txtOutput.setText(clientHandler.sendMessage(Request.GET, "test"));
+                                connectFlag = false;
                                 return;
 //                                if (comboBoxRequests.getSelectedItem() == Request.GET && checkboxAll.isSelected()) {
 //                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, "", "", "", "", 0, true, checkboxBibtex.isSelected()));
@@ -67,12 +74,13 @@ public class GUI extends JFrame {
                                 exception.printStackTrace();
                         }
                 } else {
-                        connectDialog();
+                       if(connectFlag) connectDialog();
                 }
         }
 
 
         private void renderContent() {
+
                 panelParent = new JPanel();
                 panelParent.setBorder(new EmptyBorder(5, 5, 10, 10));
                 setContentPane(panelParent);
@@ -164,6 +172,7 @@ public class GUI extends JFrame {
                 btnUnpin = new JButton("Unpin ");
 
                 btnPost = new JButton("Post ");
+              btnPost.addActionListener(this::btnSubmitHandler);
                 btnClear = new JButton("Clear ");
                 btnShake = new JButton("Shake ");
 
@@ -200,6 +209,8 @@ public class GUI extends JFrame {
                 // btnDisconnect.addActionListener();
                 btnDisconnect.setEnabled(false);
                 panelHeader.add(btnDisconnect, BorderLayout.EAST);
+                setVisible(true);
+                connectDialog();
         }
 
         JPanel panelParent;

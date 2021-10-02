@@ -25,7 +25,7 @@ public class HttpRequest extends Thread {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
             listen();
-//            disconnect();
+           disconnect();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -132,6 +132,15 @@ public class HttpRequest extends Thread {
         System.out.println("handleGet" + data);
 
         return message.toString();
+    }
+
+    private void disconnect() throws IOException {
+        out.close();
+        in.close();
+        socket.close();
+        System.out.println("Server thread [" + getName() + "] disconnected.");
+        System.out.println("Active connections: " + (Thread.activeCount() - 2));
+        this.interrupt();
     }
 
 }
