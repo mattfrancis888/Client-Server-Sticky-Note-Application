@@ -8,16 +8,16 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 
-public class HttpRequest {
-    private final Socket socket;
+public class HttpRequest extends Thread {
+    private  Socket socket;
     private BufferedReader in;
     private PrintWriter out;
-    private final ArrayList<StickyNote> bookEntries;
+    private  ArrayList<StickyNote> stickyNoteEntries;
 
-    public ServerThread(String name, Socket socket, ArrayList<StickyNote> stickyNoteEntries) {
-        super(name);
+    public HttpRequest(String name, Socket socket, ArrayList<StickyNote> stickyNoteEntries) {
+//        super(name);
         this.socket = socket;
-        this.bookEntries = stickyNoteEntries;
+        this.stickyNoteEntries = stickyNoteEntries;
     }
 
     public void run() {
@@ -84,43 +84,43 @@ public class HttpRequest {
     //handle stuff
     private String handlePost(String[] data) {
         String message;
-        StickyNote stickyNote = new StickyNote();
-        for (String line : data) {
-            line = line.trim();
-            String[] words = line.split(" ");
-            String value;
-            switch (words[0]) {
-                case "COLOR":
-                    if (Util.findByISBN(bookEntries, words[1]) != null) {
-                        message = "ERROR: Book already exists";
-                        return message;
-                    }
-                    stickyNote.setColor(words[1]);
-                    break;
-                case "X":
-                    value = line.substring(words[0].length()).trim();
-                    stickyNote.setX(value);
-                    break;
-                case "Y":
-                    value = line.substring(words[0].length()).trim();
-                    stickyNote.setY(value);
-                    break;
-                case "NAME":
-                    value = line.substring(words[0].length()).trim();
-                    stickyNote.setName(value);
-                    break;
-                case "WIDTH":
-                    stickyNote.setWidth(Integer.parseInt(words[1]));
-                    break;
-                case "HEIGHT":
-                    stickyNote.setHeight(Integer.parseInt(words[1]));
-                    break;
-                default:
-                    break;
-            }
-        }
-        message = "-----Successfully added-----\n" + bookEntry.toString();
-        bookEntries.add(bookEntry);
+//        StickyNote stickyNote = new StickyNote();
+//        for (String line : data) {
+//            line = line.trim();
+//            String[] words = line.split(" ");
+//            String value;
+//            switch (words[0]) {
+//                case "COLOR":
+//                    if (Util.findByISBN(bookEntries, words[1]) != null) {
+//                        message = "ERROR: Book already exists";
+//                        return message;
+//                    }
+//                    stickyNote.setColor(words[1]);
+//                    break;
+//                case "X":
+//                    value = line.substring(words[0].length()).trim();
+//                    stickyNote.setX(value);
+//                    break;
+//                case "Y":
+//                    value = line.substring(words[0].length()).trim();
+//                    stickyNote.setY(value);
+//                    break;
+//                case "NAME":
+//                    value = line.substring(words[0].length()).trim();
+//                    stickyNote.setName(value);
+//                    break;
+//                case "WIDTH":
+//                    stickyNote.setWidth(Integer.parseInt(words[1]));
+//                    break;
+//                case "HEIGHT":
+//                    stickyNote.setHeight(Integer.parseInt(words[1]));
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+        message = "-----Successfully added-----\n";
+//        bookEntries.add(bookEntry);
         return message;
     }
 
