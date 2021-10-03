@@ -80,15 +80,15 @@ public class GUI extends JFrame {
 
                                 if (comboBoxRequests.getSelectedItem() == Request.GET) {
                                         System.out.println("COMBO BOX GET CLICKED");
-                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, "test", 1, 5));
+                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, "test", 1, 5, "matt", 100, 200));
                                 }
                                 if (comboBoxRequests.getSelectedItem() == Request.POST) {
                                         System.out.println("BTN POST CLICKED");
-                                        txtOutput.setText(clientHandler.sendMessage(Request.POST, "test",1,5));
+                                        txtOutput.setText(clientHandler.sendMessage(Request.POST, "test",1,5, "matt", 100, 200));
                                 }
                                 if (comboBoxRequests.getSelectedItem() == Request.CLEAR) {
                                         System.out.println("BTN CLEAR CLICKED");
-                                       txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, "test",1,5));
+                                       txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, "test",1,5, "matt", 100, 200));
                                 }
                                 connectFlag = false;
                                 return;

@@ -101,16 +101,18 @@ public class HttpRequest extends Thread {
                     value = line.substring(words[0].length()).trim();
                     stickyNote.setY(10);
                     break;
-//                case "NAME":
-//                    value = line.substring(words[0].length()).trim();
-//                    stickyNote.setName(value);
-//                    break;
-//                case "WIDTH":
+                case "NAME":
+                    value = line.substring(words[0].length()).trim();
+                    stickyNote.setName("matt");
+                    break;
+                case "WIDTH":
 //                    stickyNote.setWidth(Integer.parseInt(words[1]));
-//                    break;
-//                case "HEIGHT":
+                    stickyNote.setWidth(100);
+                    break;
+                case "HEIGHT":
 //                    stickyNote.setHeight(Integer.parseInt(words[1]));
-//                    break;
+                    stickyNote.setHeight(200);
+                    break;
                 default:
                     break;
             }
