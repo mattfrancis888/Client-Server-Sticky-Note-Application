@@ -14,7 +14,7 @@ public class GUI extends JFrame {
 
                 setTitle("Stickynote Board");
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                setBounds(100, 100, 800, 800);
+                setBounds(0, 0, 2000, 2000);
                 clientHandler = new ClientHandler();
                 renderContent();
                 setVisible(true);
@@ -132,27 +132,27 @@ public class GUI extends JFrame {
                 panelLeft.add(panelFields, BorderLayout.CENTER);
                 panelFields.setLayout(new BoxLayout(panelFields, BoxLayout.Y_AXIS));
                 // IP ADDRESS Section
-                panelIP = new JPanel();
-                panelFields.add(panelIP);
-                panelIP.setLayout(new GridLayout(0, 2, 0, 0));
-
-                labelIP = new JLabel("IP Address:");
-                panelIP.add(labelIP);
-
-                txtIP = new JTextField();
-                panelIP.add(txtIP);
-                txtIP.setColumns(10);
+//                panelIP = new JPanel();
+//                panelFields.add(panelIP);
+//                panelIP.setLayout(new GridLayout(0, 2, 0, 0));
+//
+//                labelIP = new JLabel("IP Address:");
+//                panelIP.add(labelIP);
+//
+//                txtIP = new JTextField();
+//                panelIP.add(txtIP);
+//                txtIP.setColumns(10);
                 // PORT Section
-                panelPort = new JPanel();
-                panelFields.add(panelPort);
-                panelPort.setLayout(new GridLayout(0, 2, 0, 0));
-
-                lbPort = new JLabel("Port:");
-                panelPort.add(lbPort);
-
-                txtPort = new JTextField();
-                panelPort.add(txtPort);
-                txtPort.setColumns(10);
+//                panelPort = new JPanel();
+//                panelFields.add(panelPort);
+//                panelPort.setLayout(new GridLayout(0, 2, 0, 0));
+//
+//                lbPort = new JLabel("Port:");
+//                panelPort.add(lbPort);
+//
+//                txtPort = new JTextField();
+//                panelPort.add(txtPort);
+//                txtPort.setColumns(10);
 
                 //Color
                 panelTITLE = new JPanel();
@@ -209,7 +209,7 @@ public class GUI extends JFrame {
                 txtOutput = new JTextArea();
                 txtOutput.setEditable(false);
                 txtOutput.setLineWrap(true);
-                txtOutput.setBorder(new BevelBorder(BevelBorder.LOWERED));
+                txtOutput.setBorder(new EmptyBorder(0, 0, 500, 500));
                 panelOutput.setViewportView(txtOutput);
 
                 // Connect Button
