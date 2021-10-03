@@ -13,11 +13,14 @@ public class HttpRequest extends Thread {
     private BufferedReader in;
     private PrintWriter out;
     private  ArrayList<StickyNote> stickyNoteEntries;
+    private ArrayList<Integer>pinnedNotes;
 
-    public HttpRequest(String name, Socket socket, ArrayList<StickyNote> stickyNoteEntries) {
+
+    public HttpRequest(String name, Socket socket, ArrayList<StickyNote> stickyNoteEntries, ArrayList<Integer>pinnedNotes) {
        super(name);
         this.socket = socket;
         this.stickyNoteEntries = stickyNoteEntries;
+        this.pinnedNotes=pinnedNotes;
     }
 
     public void run() {
@@ -39,14 +42,14 @@ public class HttpRequest extends Thread {
                 return handlePost(data);
             case "GET":
                 return handleGet(data);
-//            case "PIN":
-//                return handlePin(data);
-//            case "UNPIN":
-//                return handleUnpin(data);
+            case "PIN":
+                return handlePin(data);
+            case "UNPIN":
+                return handleUnpin(data);
             case "CLEAR":
                 return handleClear();
-//            case "SHAKE":
-//                return handleShake(data);
+            case "SHAKE":
+                return handleShake(data);
             default:
                 return "ERROR - Request is not a POST, GET, PIN, UNPIN, CLEAR, SHAKE";
         }
@@ -155,6 +158,91 @@ public class HttpRequest extends Thread {
         stickyNoteEntries.clear();
         return "The Sticky note board has been cleared";
     }
+
+    private String handlePin(String[]data) {
+
+        int x = 1;//change to 0 once we stop hardcode
+        int y = 10;//change to 0 once we stop hardcode
+        for (String line : data) {
+            line = line.trim();
+            String[] words = line.split(" ");
+            String value;
+            if (words[0] == "X") {//x value will be set here
+                System.out.println("HANDLE PIN: " + words[0] + " ");
+                value = line.substring(words[0].length()).trim();
+            }
+            if (words[0] == "Y") {//y value will be set here
+                System.out.println("HANDLE PIN: " + words[0] + " ");
+                value = line.substring(words[0].length()).trim();
+                break;
+            }
+        }
+        int xt = 0;
+        int yt = 0;
+        for (int i = 0; i < stickyNoteEntries.size(); i++) {//checks if the coordinates exist and then pins
+            xt = stickyNoteEntries.get(i).getX();
+            yt = stickyNoteEntries.get(i).getY();
+            if (xt == x && yt == y) {
+                pinnedNotes.add(x);
+                pinnedNotes.add(y);
+                return "The sticky note at x=" + x + " and y=" + y + " has been pinned";
+            }
+        }
+
+        return "The sticky not does not exist at the coordinate provided";
+    }
+
+    private String handleUnpin(String[]data) {
+        boolean flag=false;
+        int x = 1;//change to 0 once we stop hardcode
+        int y = 10;//change to 0 once we stop hardcode
+        for (String line : data) {
+            line = line.trim();
+            String[] words = line.split(" ");
+            String value;
+            if (words[0] == "X") {
+                System.out.println("HANDLE PIN: " + words[0] + " ");
+                value = line.substring(words[0].length()).trim();
+            }
+            if (words[0] == "Y") {
+                System.out.println("HANDLE PIN: " + words[0] + " ");
+                value = line.substring(words[0].length()).trim();
+                break;
+            }
+        }
+        for (int i = 0; i < pinnedNotes.size() - 1; i++) {//checks if coordinates exist and removes from pinlist
+            if (pinnedNotes.get(i) == x && pinnedNotes.get(i + 1) == y) {
+                pinnedNotes.remove(i + 1);
+                pinnedNotes.remove(i);
+                flag=true;
+                break;
+            }
+        }
+        if(flag)return "The sticky note at x=" + x + " and y=" + y + " has been unpinned";
+        else return "The sticky note for unpinning does not exist";
+    }
+
+    private String handleShake(String[]data) {
+        int x=0;
+        int y=0;
+        boolean flag=false;
+        for (int i = 0; i < stickyNoteEntries.size(); i++) {
+            flag=false;
+            StickyNote curr=stickyNoteEntries.get(i);
+            x=curr.getX();
+            y=curr.getY();
+            for (int j = 0; j < pinnedNotes.size() - 1; j++) {
+                if (pinnedNotes.get(j) == x && pinnedNotes.get(j + 1) == y) {
+                    flag = true;
+                }
+            }
+            if(!flag){
+                stickyNoteEntries.remove(i);
+            }
+        }
+        return "Unpinned notes have been removed";
+    }
+
 
     private void disconnect() throws IOException {
         out.close();

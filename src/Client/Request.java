@@ -3,6 +3,9 @@ package Client;
 public enum Request {
     GET,
     POST,
-    CLEAR
+    CLEAR,
+    PIN,
+    UNPIN,
+    SHAKE
 }
 

@@ -13,13 +13,14 @@ public static void main(String[] args) throws IOException {
     else port = Integer.parseInt(args[0]);
 
     ArrayList<StickyNote> stickyEntries = new ArrayList<StickyNote>();
+    ArrayList<Integer>pinnedNotes=new ArrayList<Integer>();
     ServerSocket serverSocket = new ServerSocket(port);
     System.out.println("Server running on port " + port + ".");
 
     while (true) {
         Socket clientSocket = serverSocket.accept();
         HttpRequest serverThread = new HttpRequest(Thread.activeCount() + "",
-                clientSocket, stickyEntries);
+                clientSocket, stickyEntries,pinnedNotes);
         serverThread.start();
         System.out.println("Connection detected, starting server thread [" + (Thread.activeCount() - 1) + "]");
         System.out.println("Active connections: " + (Thread.activeCount() - 1));

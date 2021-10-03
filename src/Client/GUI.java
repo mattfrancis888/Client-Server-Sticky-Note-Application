@@ -90,6 +90,18 @@ public class GUI extends JFrame {
                                         System.out.println("BTN CLEAR CLICKED");
                                        txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, COLOR,1,5, "matt", 100, 200));
                                 }
+                                if (comboBoxRequests.getSelectedItem() == Request.PIN) {
+                                        System.out.println("BTN PIN CLICKED");
+                                        txtOutput.setText(clientHandler.sendMessage(Request.PIN, COLOR,1,5, "matt", 100, 200));
+                                }
+                                if (comboBoxRequests.getSelectedItem() == Request.UNPIN) {
+                                        System.out.println("BTN UNPIN CLICKED");
+                                        txtOutput.setText(clientHandler.sendMessage(Request.UNPIN, COLOR,1,5, "matt", 100, 200));
+                                }
+                                if (comboBoxRequests.getSelectedItem() == Request.SHAKE) {
+                                        System.out.println("BTN SHAKE CLICKED");
+                                        txtOutput.setText(clientHandler.sendMessage(Request.SHAKE, COLOR,1,5, "matt", 100, 200));
+                                }
                                 connectFlag = false;
                                 return;
 
