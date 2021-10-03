@@ -64,7 +64,11 @@ public class GUI extends JFrame {
                                 System.out.println("isConnected");
                                 // Handle Title
                                 String COLOR = txtColor.getText().trim();
-
+                                int X = Integer.parseInt(txtX.getText().trim());
+                                int Y = Integer.parseInt(txtY.getText().trim());
+                                String NAME = txtName.getText().trim();
+                                int WIDTH = Integer.parseInt(txtWidth.getText().trim());
+                                int HEIGHT = Integer.parseInt(txtHeight.getText().trim());
                                 // Handle All Get request
 //                                if (e.getSource() == btnSend) {
 //                                        System.out.println("BTN GET CLICKED");
@@ -83,8 +87,8 @@ public class GUI extends JFrame {
                                         txtOutput.setText(clientHandler.sendMessage(Request.GET, COLOR, 1, 5, "matt", 100, 200));
                                 }
                                 if (comboBoxRequests.getSelectedItem() == Request.POST) {
-                                        System.out.println("BTN POST CLICKED " + COLOR);
-                                        txtOutput.setText(clientHandler.sendMessage(Request.POST, COLOR,1,5, "matt", 100, 200));
+                                        System.out.println("BTN POST CLICKED " + WIDTH + " " +  HEIGHT);
+                                        txtOutput.setText(clientHandler.sendMessage(Request.POST, COLOR,X,Y, NAME, WIDTH, HEIGHT));
                                 }
                                 if (comboBoxRequests.getSelectedItem() == Request.CLEAR) {
                                         System.out.println("BTN CLEAR CLICKED");
@@ -106,7 +110,7 @@ public class GUI extends JFrame {
                                 return;
 
                         } catch (NumberFormatException exception) {
-                                JOptionPane.showMessageDialog(this, "Invalid ISBN", "Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this, "Invalid Inputs (Number must be string)", "Error", JOptionPane.ERROR_MESSAGE);
                         } catch (IOException exception) {
                                 exception.printStackTrace();
                         }
