@@ -74,7 +74,7 @@ public class HttpRequest extends Thread {
                     /* PROCESS DATA START*/
                     outMessage = processData(inMessage.split("\n")).trim() + "\r\n\\EOF";
                 }
-                out.println(outMessage);
+//                out.println(outMessage);
                 line = in.readLine();
             }
         } catch (IOException exception) {
@@ -140,6 +140,7 @@ public class HttpRequest extends Thread {
                     if (stickyNoteEntries.size() == 0)
                         return "No colors found.";
                     for (StickyNote stickyNote : stickyNoteEntries) {
+                        message.append("_____________Retrieved_______________\n");
                         message.append(stickyNote.toString());
                         message.append("\r\n");
                     }
