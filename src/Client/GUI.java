@@ -202,7 +202,7 @@ public class GUI extends JFrame {
                 panelPost.add(txtPost);
                 txtPost.setColumns(10);
 
-                btnSend = new JButton("SEND DATA ");
+                btnSend = new JButton("SEND REQUEST ");
                 btnSend.addActionListener(this::btnSubmitHandler);
 
 
