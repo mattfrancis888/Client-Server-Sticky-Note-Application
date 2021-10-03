@@ -43,8 +43,8 @@ public class HttpRequest extends Thread {
 //                return handlePin(data);
 //            case "UNPIN":
 //                return handleUnpin(data);
-//            case "CLEAR":
-//                return handleClear(data);
+            case "CLEAR":
+                return handleClear();
 //            case "SHAKE":
 //                return handleShake(data);
             default:
@@ -148,6 +148,10 @@ public class HttpRequest extends Thread {
         }
 
         return message.toString();
+    }
+    private String handleClear() {
+        stickyNoteEntries.clear();
+        return "The Sticky note board has been cleared";
     }
 
     private void disconnect() throws IOException {

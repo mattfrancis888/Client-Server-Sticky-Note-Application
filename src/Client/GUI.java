@@ -61,7 +61,11 @@ public class GUI extends JFrame {
                                 } else if(e.getSource() == btnPost) {
                                         System.out.println("BTN POST CLICKED");
                                         txtOutput.setText(clientHandler.sendMessage(Request.POST, "test"));
+                                }else if (e.getSource()==btnClear){
+                                        System.out.println("BTN CLEAR CLICKED");
+                                        txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, "test"));
                                 }
+
                                 connectFlag = false;
                                 return;
 
@@ -169,17 +173,18 @@ public class GUI extends JFrame {
                 btnUnpin = new JButton("Unpin ");
 
                 btnPost = new JButton("Post ");
-              btnPost.addActionListener(this::btnSubmitHandler);
+                btnPost.addActionListener(this::btnSubmitHandler);
                 btnClear = new JButton("Clear ");
+                btnClear.addActionListener(this::btnSubmitHandler);
                 btnShake = new JButton("Shake ");
 
                 panelPost.add(btnGet);
                 panelPost.add(btnPost);
-                panelPost.add(btnPin);
-                panelPost.add(btnUnpin);
+              //  panelPost.add(btnPin);
+               // panelPost.add(btnUnpin);
 
                 panelPost.add(btnClear);
-                panelPost.add(btnShake);
+               // panelPost.add(btnShake);
 
                 // Output section
                 panelOutput = new JScrollPane();
