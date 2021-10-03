@@ -74,7 +74,7 @@ public class HttpRequest extends Thread {
                     /* PROCESS DATA START*/
                     outMessage = processData(inMessage.split("\n")).trim() + "\r\n\\EOF";
                 }
-//                out.println(outMessage);
+                out.println(outMessage);
                 line = in.readLine();
             }
         } catch (IOException exception) {
