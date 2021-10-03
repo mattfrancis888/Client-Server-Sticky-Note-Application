@@ -91,7 +91,9 @@ public class HttpRequest extends Thread {
             System.out.println("HANDLE POST: " + words[0] + " ");
             switch (words[0]) {
                 case "COLOR":
-                    stickyNote.setColor("TEST COLOR");
+                    value = line.substring(words[0].length()).trim();
+                    System.out.println("SET "  + value);
+                    stickyNote.setColor(value);
                     break;
                 case "X":
                     value = line.substring(words[0].length()).trim();

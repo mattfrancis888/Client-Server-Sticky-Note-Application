@@ -41,18 +41,19 @@ public class ClientHandler {
     private String processRequest(Request request, String color, int x, int y, String name, int width, int height) {
         String requestData = request.name() + "\r\n";
 
-            requestData += "COLOR " + color +  "\r\n" + "X " + x +  "\r\n" + "Y " + y + "\r\n" +
-                    "NAME " + name + "\r\n" + "WIDTH " + "\r\n" + width + "HEIGHT " + height + "\r\n";
+        requestData += "COLOR " + color +  "\r\n" + "X " + x +  "\r\n" + "Y " + y + "\r\n" +
+                "NAME " + name + "\r\n" + "WIDTH " + "\r\n" + width + "HEIGHT " + height + "\r\n";
 
         return requestData;
     }
 
     public String sendMessage(Request request, String color, int x, int y, String name, int width, int height) throws IOException {
+
         String requestData = processRequest(request, color, x,y,name,width,height);
-//        System.out.println("sendMessage: "  + requestData + "color is: " + color);
+        System.out.println("color is: " + color);
         System.out.println("sendMessage: "  + requestData);
        out.println(requestData + "\r\n\\EOF");
-        out.println("test" + "\r\n\\EOF");
+
         String response = "";
         String line = in.readLine();
         while (line != null && !line.contains("\\EOF")) {

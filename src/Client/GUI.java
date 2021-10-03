@@ -63,7 +63,7 @@ public class GUI extends JFrame {
                         try {
                                 System.out.println("isConnected");
                                 // Handle Title
-                                String TITLE = txtTITLE.getText().trim();
+                                String COLOR = txtColor.getText().trim();
 
                                 // Handle All Get request
 //                                if (e.getSource() == btnSend) {
@@ -79,16 +79,16 @@ public class GUI extends JFrame {
 
 
                                 if (comboBoxRequests.getSelectedItem() == Request.GET) {
-                                        System.out.println("COMBO BOX GET CLICKED");
-                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, "test", 1, 5, "matt", 100, 200));
+                                        System.out.println("COMBO BOX GET CLICKED " + COLOR);
+                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, COLOR, 1, 5, "matt", 100, 200));
                                 }
                                 if (comboBoxRequests.getSelectedItem() == Request.POST) {
-                                        System.out.println("BTN POST CLICKED");
-                                        txtOutput.setText(clientHandler.sendMessage(Request.POST, "test",1,5, "matt", 100, 200));
+                                        System.out.println("BTN POST CLICKED " + COLOR);
+                                        txtOutput.setText(clientHandler.sendMessage(Request.POST, COLOR,1,5, "matt", 100, 200));
                                 }
                                 if (comboBoxRequests.getSelectedItem() == Request.CLEAR) {
                                         System.out.println("BTN CLEAR CLICKED");
-                                       txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, "test",1,5, "matt", 100, 200));
+                                       txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, COLOR,1,5, "matt", 100, 200));
                                 }
                                 connectFlag = false;
                                 return;
@@ -154,13 +154,72 @@ public class GUI extends JFrame {
                 panelTITLE = new JPanel();
                 panelFields.add(panelTITLE);
                 panelTITLE.setLayout(new GridLayout(0, 2, 0, 0));
-
                 lblTITLE = new JLabel("TITLE:");
                 panelTITLE.add(lblTITLE);
 
-                txtTITLE = new JTextField();
-                panelTITLE.add(txtTITLE);
-                txtTITLE.setColumns(10);
+                txtColor = new JTextField();
+                panelTITLE.add(txtColor);
+                txtColor.setColumns(10);
+
+                //X
+                panelX = new JPanel();
+                panelFields.add(panelX);
+                panelX.setLayout(new GridLayout(0, 2, 0, 0));
+
+                lblX = new JLabel("X:");
+                panelX.add(lblX);
+
+                txtX = new JTextField();
+                panelX.add(txtX);
+                txtX.setColumns(10);
+                //Y
+                panelY = new JPanel();
+                panelFields.add(panelY);
+                panelY.setLayout(new GridLayout(0, 2, 0, 0));
+
+                lblY = new JLabel("Y:");
+                panelY.add(lblY);
+
+                txtY = new JTextField();
+                panelY.add(txtY);
+                txtX.setColumns(10);
+                //Name
+                panelName = new JPanel();
+                panelFields.add(panelName);
+                panelName.setLayout(new GridLayout(0, 2, 0, 0));
+
+                lblName = new JLabel("NAME:");
+                panelName.add(lblName);
+
+                txtName = new JTextField();
+                panelName.add(txtName);
+                txtName.setColumns(10);
+                //Width
+
+                panelWidth = new JPanel();
+                panelFields.add(panelWidth);
+                panelWidth.setLayout(new GridLayout(0, 2, 0, 0));
+
+                lblWidth = new JLabel("WIDTH:");
+                panelWidth.add(lblWidth);
+
+                txtWidth = new JTextField();
+                panelWidth.add(txtWidth);
+                txtWidth.setColumns(10);
+
+                //Height
+
+                panelHeight = new JPanel();
+                panelFields.add(panelHeight);
+                panelHeight.setLayout(new GridLayout(0, 2, 0, 0));
+
+                lblHeight = new JLabel("HEIGHT:");
+                panelHeight.add(lblHeight);
+
+                txtHeight = new JTextField();
+                panelHeight.add(txtHeight);
+                txtHeight.setColumns(10);
+
 
 
                 //COMBO BOX
@@ -238,9 +297,31 @@ public class GUI extends JFrame {
         JTextField txtIPAddress;
 
 
-        JTextField txtTITLE;
+
         JLabel lblTITLE;
         JPanel panelTITLE;
+        JTextField txtColor;
+
+        JPanel panelX;
+        JLabel lblX;
+        JTextField txtX;
+
+        JPanel panelY;
+        JLabel lblY;
+        JTextField txtY;
+
+        JPanel panelName;
+        JLabel lblName;
+        JTextField txtName;
+
+        JPanel panelWidth;
+        JLabel lblWidth;
+        JTextField txtWidth;
+
+        JPanel panelHeight;
+        JLabel lblHeight;
+        JTextField txtHeight;
+
         JComboBox<Request> comboBoxRequests;
 
 }
