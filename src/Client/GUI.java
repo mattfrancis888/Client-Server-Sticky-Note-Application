@@ -66,17 +66,30 @@ public class GUI extends JFrame {
                                 String TITLE = txtTITLE.getText().trim();
 
                                 // Handle All Get request
-                                if (e.getSource() == btnGet) {
-                                        System.out.println("BTN GET CLICKED");
+//                                if (e.getSource() == btnSend) {
+//                                        System.out.println("BTN GET CLICKED");
+//                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, "test"));
+//                                } else if(e.getSource() == btnPost) {
+//                                        System.out.println("BTN POST CLICKED");
+//                                        txtOutput.setText(clientHandler.sendMessage(Request.POST, "test"));
+//                                }else if (e.getSource()==btnClear){
+//                                        System.out.println("BTN CLEAR CLICKED");
+//                                        txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, "test"));
+//                                }
+
+
+                                if (comboBoxRequests.getSelectedItem() == Request.GET) {
+                                        System.out.println("COMBO BOX GET CLICKED");
                                         txtOutput.setText(clientHandler.sendMessage(Request.GET, "test"));
-                                } else if(e.getSource() == btnPost) {
+                                }
+                                if (comboBoxRequests.getSelectedItem() == Request.POST) {
                                         System.out.println("BTN POST CLICKED");
                                         txtOutput.setText(clientHandler.sendMessage(Request.POST, "test"));
-                                }else if (e.getSource()==btnClear){
-                                        System.out.println("BTN CLEAR CLICKED");
-                                        txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, "test"));
                                 }
-
+                                if (comboBoxRequests.getSelectedItem() == Request.CLEAR) {
+                                        System.out.println("BTN CLEAR CLICKED");
+                                       txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, "test"));
+                                }
                                 connectFlag = false;
                                 return;
 
@@ -86,10 +99,14 @@ public class GUI extends JFrame {
                                 exception.printStackTrace();
                         }
                 } else {
-                       if(connectFlag) connectDialog();
+                     connectDialog();
                 }
         }
 
+
+        private void comboBoxRequestsHandler(ActionEvent e) {
+
+        }
 
         private void renderContent() {
 
@@ -166,6 +183,13 @@ public class GUI extends JFrame {
                 panelTITLE.add(txtTITLE);
                 txtTITLE.setColumns(10);
 
+
+                //COMBO BOX
+
+                comboBoxRequests = new JComboBox<>(Request.values());
+                comboBoxRequests.addActionListener(this::comboBoxRequestsHandler);
+                panelRequest.add(comboBoxRequests);
+
                 // POST Section
                 panelPost = new JPanel();
                 panelFields.add(panelPost);
@@ -178,24 +202,11 @@ public class GUI extends JFrame {
                 panelPost.add(txtPost);
                 txtPost.setColumns(10);
 
-                btnGet = new JButton("Get ");
-                btnGet.addActionListener(this::btnSubmitHandler);
-                btnPin = new JButton("Pin ");
-                btnUnpin = new JButton("Unpin ");
+                btnSend = new JButton("SEND DATA ");
+                btnSend.addActionListener(this::btnSubmitHandler);
 
-                btnPost = new JButton("Post ");
-                btnPost.addActionListener(this::btnSubmitHandler);
-                btnClear = new JButton("Clear ");
-                btnClear.addActionListener(this::btnSubmitHandler);
-                btnShake = new JButton("Shake ");
 
-                panelPost.add(btnGet);
-                panelPost.add(btnPost);
-              //  panelPost.add(btnPin);
-               // panelPost.add(btnUnpin);
-
-                panelPost.add(btnClear);
-               // panelPost.add(btnShake);
+                panelPost.add(btnSend);
 
                 // Output section
                 panelOutput = new JScrollPane();
@@ -255,7 +266,7 @@ public class GUI extends JFrame {
 
         JButton btnPin;
         JButton btnUnpin;
-        JButton btnGet;
+        JButton btnSend;
         JButton btnPost;
 
         JButton btnClear;
@@ -267,5 +278,6 @@ public class GUI extends JFrame {
         JTextField txtTITLE;
         JLabel lblTITLE;
         JPanel panelTITLE;
+        JComboBox<Request> comboBoxRequests;
 
 }

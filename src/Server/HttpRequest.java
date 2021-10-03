@@ -15,7 +15,7 @@ public class HttpRequest extends Thread {
     private  ArrayList<StickyNote> stickyNoteEntries;
 
     public HttpRequest(String name, Socket socket, ArrayList<StickyNote> stickyNoteEntries) {
-//        super(name);
+       super(name);
         this.socket = socket;
         this.stickyNoteEntries = stickyNoteEntries;
     }
@@ -55,14 +55,11 @@ public class HttpRequest extends Thread {
     private void listen() {
         String line, inMessage, outMessage;
         try {
-            //Read everything line by line from the input
             line = in.readLine();
-
             while (line != null) {
-                System.out.println("LISTEN VAL" + line);
                 inMessage = "";
-                if (line.equals("Connection Request")) { //COME BACK
-                    outMessage = "Response";
+                if (line.equals("ping")) {
+                    outMessage = "pong";
                 } else {
                     /* READ DATA START */
                     while (!line.contains("\\EOF")) {

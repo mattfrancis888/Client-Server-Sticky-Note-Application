@@ -32,18 +32,12 @@ public class ClientHandler {
 
     public boolean isConnected() {
         try {
-            out.println("Connection Request");
-            if(in.readLine().equals("Response")){
-                return true;
-            }
-            else{
-                return false;
-            }
+            out.println("ping");
+            return in.readLine().equals("pong");
         } catch (NullPointerException | IOException e) {
             return false;
         }
     }
-
     private String processRequest(Request request, String color) {
         String requestData = request.name() + "\r\n";
 
