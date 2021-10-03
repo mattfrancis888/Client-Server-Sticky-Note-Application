@@ -38,16 +38,16 @@ public class ClientHandler {
             return false;
         }
     }
-    private String processRequest(Request request, String color) {
+    private String processRequest(Request request, String color, int x, int y) {
         String requestData = request.name() + "\r\n";
 
-            requestData += "COLOR " + color;
+            requestData += "COLOR " + color +  "\r\n" + "X " + x +  "\r\n" + "Y " + y;;
 
         return requestData;
     }
 
-    public String sendMessage(Request request, String color) throws IOException {
-        String requestData = processRequest(request, color);
+    public String sendMessage(Request request, String color, int x, int y) throws IOException {
+        String requestData = processRequest(request, color, x,y);
 //        System.out.println("sendMessage: "  + requestData + "color is: " + color);
         System.out.println("sendMessage: "  + requestData);
        out.println(requestData + "\r\n\\EOF");

@@ -93,14 +93,14 @@ public class HttpRequest extends Thread {
                 case "COLOR":
                     stickyNote.setColor("TEST COLOR");
                     break;
-//                case "X":
-//                    value = line.substring(words[0].length()).trim();
-//                    stickyNote.setX(value);
-//                    break;
-//                case "Y":
-//                    value = line.substring(words[0].length()).trim();
-//                    stickyNote.setY(value);
-//                    break;
+                case "X":
+                    value = line.substring(words[0].length()).trim();
+                    stickyNote.setX(1);
+                    break;
+                case "Y":
+                    value = line.substring(words[0].length()).trim();
+                    stickyNote.setY(10);
+                    break;
 //                case "NAME":
 //                    value = line.substring(words[0].length()).trim();
 //                    stickyNote.setName(value);
