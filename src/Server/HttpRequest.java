@@ -238,9 +238,10 @@ public class HttpRequest extends Thread {
             }
             if(!flag){
                 stickyNoteEntries.remove(i);
+                return "Unpinned note removed at x=" + x+ " and y= " + y;
             }
         }
-        return "Unpinned notes have been removed";
+        return "No more unpinned notes left";
     }
 
 
