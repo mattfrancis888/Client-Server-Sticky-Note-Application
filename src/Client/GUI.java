@@ -46,6 +46,17 @@ public class GUI extends JFrame {
                 }
         }
 
+        private void btnDisconnectHandler(ActionEvent e) {
+                try {
+                        btnDisconnect.setEnabled(false);
+                        clientHandler.disconnect();
+                        connectDialog();
+                } catch (IOException exception) {
+                        exception.printStackTrace();
+                }
+        }
+
+
         private void btnSubmitHandler(ActionEvent e) {
                 if (clientHandler.isConnected()) {
 
@@ -208,7 +219,7 @@ public class GUI extends JFrame {
 
                 // Disconnect Button
                 btnDisconnect = new JButton("Disconnect");
-                // btnDisconnect.addActionListener();
+                btnDisconnect.addActionListener(this::btnDisconnectHandler);
                 btnDisconnect.setEnabled(false);
                 panelHeader.add(btnDisconnect, BorderLayout.EAST);
                 setVisible(true);

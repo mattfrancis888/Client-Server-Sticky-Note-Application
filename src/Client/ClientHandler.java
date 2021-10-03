@@ -24,6 +24,11 @@ public class ClientHandler {
             throw new IOException("ERROR: Connection refused please check IP Address and Port and try again");
         }
     }
+    public void disconnect() throws IOException {
+        in.close();
+        out.close();
+        clientSocket.close();
+    }
 
     public boolean isConnected() {
         try {
