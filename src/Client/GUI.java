@@ -148,28 +148,7 @@ public class GUI extends JFrame {
                 panelFields.setBorder(new EmptyBorder(10, 0, 10, 0));
                 panelLeft.add(panelFields, BorderLayout.CENTER);
                 panelFields.setLayout(new BoxLayout(panelFields, BoxLayout.Y_AXIS));
-                // IP ADDRESS Section
-//                panelIP = new JPanel();
-//                panelFields.add(panelIP);
-//                panelIP.setLayout(new GridLayout(0, 2, 0, 0));
-//
-//                labelIP = new JLabel("IP Address:");
-//                panelIP.add(labelIP);
-//
-//                txtIP = new JTextField();
-//                panelIP.add(txtIP);
-//                txtIP.setColumns(10);
-                // PORT Section
-//                panelPort = new JPanel();
-//                panelFields.add(panelPort);
-//                panelPort.setLayout(new GridLayout(0, 2, 0, 0));
-//
-//                lbPort = new JLabel("Port:");
-//                panelPort.add(lbPort);
-//
-//                txtPort = new JTextField();
-//                panelPort.add(txtPort);
-//                txtPort.setColumns(10);
+
 
                 //Color
                 panelTITLE = new JPanel();
@@ -185,28 +164,21 @@ public class GUI extends JFrame {
 
 
                 //COMBO BOX
-
                 comboBoxRequests = new JComboBox<>(Request.values());
                 comboBoxRequests.addActionListener(this::comboBoxRequestsHandler);
                 panelRequest.add(comboBoxRequests);
 
                 // POST Section
-                panelPost = new JPanel();
-                panelFields.add(panelPost);
-                panelPost.setLayout(new GridLayout(0, 2, 0, 0));
+                panelRequest = new JPanel();
+                panelFields.add(panelRequest);
+                panelRequest.setLayout(new GridLayout(0, 2, 0, 0));
 
-                lbPost = new JLabel("Data For POST:");
-                panelPost.add(lbPost);
-
-                txtPost = new JTextField();
-                panelPost.add(txtPost);
-                txtPost.setColumns(10);
 
                 btnSend = new JButton("SEND REQUEST ");
                 btnSend.addActionListener(this::btnSubmitHandler);
 
 
-                panelPost.add(btnSend);
+                panelRequest.add(btnSend);
 
                 // Output section
                 panelOutput = new JScrollPane();
@@ -246,20 +218,11 @@ public class GUI extends JFrame {
         JLabel lblRequest;
 
         JPanel panelFields;
-        JPanel panelIP;
-        JLabel labelIP;
-        JTextField txtIP;
         JScrollPane panelOutput;
         JLabel lblOutput;
         JTextArea txtOutput;
 
-        JPanel panelPort;
-        JLabel lbPort;
         JTextField txtPort;
-
-        JPanel panelPost;
-        JLabel lbPost;
-        JTextField txtPost;
 
         JButton btnDisconnect;
         JButton btnConnect;
