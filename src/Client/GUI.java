@@ -69,6 +69,7 @@ public class GUI extends JFrame {
                                 String NAME = txtName.getText().trim();
                                 int WIDTH = Integer.parseInt(txtWidth.getText().trim());
                                 int HEIGHT = Integer.parseInt(txtHeight.getText().trim());
+                                String MESSAGE = txtMessage.getText().trim();
                                 // Handle All Get request
 //                                if (e.getSource() == btnSend) {
 //                                        System.out.println("BTN GET CLICKED");
@@ -84,27 +85,27 @@ public class GUI extends JFrame {
 
                                 if (comboBoxRequests.getSelectedItem() == Request.GET) {
                                         System.out.println("COMBO BOX GET CLICKED " + COLOR);
-                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, COLOR, 1, 5, "matt", 100, 200));
+                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, COLOR, 1, 5, "matt", 100, 200, ""));
                                 }
                                 if (comboBoxRequests.getSelectedItem() == Request.POST) {
                                         System.out.println("BTN POST CLICKED " + WIDTH + " " +  HEIGHT);
-                                        txtOutput.setText(clientHandler.sendMessage(Request.POST, COLOR,X,Y, NAME, WIDTH, HEIGHT));
+                                        txtOutput.setText(clientHandler.sendMessage(Request.POST, COLOR,X,Y, NAME, WIDTH, HEIGHT, MESSAGE));
                                 }
                                 if (comboBoxRequests.getSelectedItem() == Request.CLEAR) {
                                         System.out.println("BTN CLEAR CLICKED");
-                                       txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, COLOR,1,5, "matt", 100, 200));
+                                       txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, COLOR,1,5, "matt", 100, 200, ""));
                                 }
                                 if (comboBoxRequests.getSelectedItem() == Request.PIN) {
                                         System.out.println("BTN PIN CLICKED");
-                                        txtOutput.setText(clientHandler.sendMessage(Request.PIN, COLOR,1,5, "matt", 100, 200));
+                                        txtOutput.setText(clientHandler.sendMessage(Request.PIN, COLOR,1,5, "matt", 100, 200,""));
                                 }
                                 if (comboBoxRequests.getSelectedItem() == Request.UNPIN) {
                                         System.out.println("BTN UNPIN CLICKED");
-                                        txtOutput.setText(clientHandler.sendMessage(Request.UNPIN, COLOR,1,5, "matt", 100, 200));
+                                        txtOutput.setText(clientHandler.sendMessage(Request.UNPIN, COLOR,1,5, "matt", 100, 200,""));
                                 }
                                 if (comboBoxRequests.getSelectedItem() == Request.SHAKE) {
                                         System.out.println("BTN SHAKE CLICKED");
-                                        txtOutput.setText(clientHandler.sendMessage(Request.SHAKE, COLOR,1,5, "matt", 100, 200));
+                                        txtOutput.setText(clientHandler.sendMessage(Request.SHAKE, COLOR,1,5, "matt", 100, 200,""));
                                 }
                                 connectFlag = false;
                                 return;
@@ -139,10 +140,10 @@ public class GUI extends JFrame {
                 panelHeader.setLayout(new BorderLayout(0, 0));
 
                 // Header
-                lblTitle = new JLabel("Stickynote Board");
-                lblTitle.setFont(new Font("Serif", Font.PLAIN, 20));
-                lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-                panelHeader.add(lblTitle, BorderLayout.CENTER);
+                lblColor = new JLabel("Stickynote Board");
+                lblColor.setFont(new Font("Serif", Font.PLAIN, 20));
+                lblColor.setHorizontalAlignment(SwingConstants.CENTER);
+                panelHeader.add(lblColor, BorderLayout.CENTER);
 
                 panelContent = new JPanel();
                 panelParent.add(panelContent, BorderLayout.CENTER);
@@ -169,14 +170,14 @@ public class GUI extends JFrame {
 
 
                 //Color
-                panelTITLE = new JPanel();
-                panelFields.add(panelTITLE);
-                panelTITLE.setLayout(new GridLayout(0, 2, 0, 0));
-                lblTITLE = new JLabel("COLOR:");
-                panelTITLE.add(lblTITLE);
+                panelColor = new JPanel();
+                panelFields.add(panelColor);
+                panelColor.setLayout(new GridLayout(0, 2, 0, 0));
+                lblColor = new JLabel("COLOR:");
+                panelColor.add(lblColor);
 
                 txtColor = new JTextField();
-                panelTITLE.add(txtColor);
+                panelColor.add(txtColor);
                 txtColor.setColumns(10);
 
                 //X
@@ -238,7 +239,17 @@ public class GUI extends JFrame {
                 panelHeight.add(txtHeight);
                 txtHeight.setColumns(10);
 
+        //Message
+                panelMessage = new JPanel();
+                panelFields.add(panelMessage);
+                panelMessage.setLayout(new GridLayout(0, 2, 0, 0));
 
+                lblMessage = new JLabel("MESSAGE:");
+                panelMessage.add(lblMessage);
+
+                txtMessage = new JTextField();
+                panelMessage.add(txtMessage);
+                txtMessage.setColumns(10);
 
                 //COMBO BOX
                 comboBoxRequests = new JComboBox<>(Request.values());
@@ -284,7 +295,7 @@ public class GUI extends JFrame {
 
         JPanel panelParent;
         JPanel panelHeader;
-        JLabel lblTitle;
+
         JPanel panelContent;
         JPanel panelLeft;
         JPanel panelRequest;
@@ -312,8 +323,8 @@ public class GUI extends JFrame {
 
 
 
-        JLabel lblTITLE;
-        JPanel panelTITLE;
+        JLabel lblColor;
+        JPanel panelColor;
         JTextField txtColor;
 
         JPanel panelX;
@@ -335,6 +346,11 @@ public class GUI extends JFrame {
         JPanel panelHeight;
         JLabel lblHeight;
         JTextField txtHeight;
+
+        JPanel panelMessage;
+        JLabel lblMessage;
+        JTextField txtMessage;
+
 
         JComboBox<Request> comboBoxRequests;
 

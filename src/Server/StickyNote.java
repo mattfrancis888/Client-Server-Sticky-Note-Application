@@ -12,7 +12,9 @@ public class StickyNote {
                 "\n y : " + y +
                 "\n Name: " + name +
                 "\n height: " + height +
-                "\n width: " + width + "\r\n";
+                "\n width: " + width +
+                "\n message: " + message +
+                "\r\n";
 
     }
 
@@ -64,11 +66,20 @@ public class StickyNote {
         this.height = height;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     private String color = "";
     private int x = 0;
     private int y = 0;
     private String name = "";
     private int width = 0;
     private int  height = 0;
+    private String  message = "";
 
 }
