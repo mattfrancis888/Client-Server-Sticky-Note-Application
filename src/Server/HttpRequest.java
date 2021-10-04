@@ -157,10 +157,16 @@ public class HttpRequest extends Thread {
                     value = line.substring(words[0].length()).trim();
                     stickyNote.setY(Integer.parseInt(value));
                     break;
+
                 case "NAME":
                     value = line.substring(words[0].length()).trim();
                     stickyNote.setName(value);
                     break;
+                case "MESSAGE":
+                    value = line.substring(words[0].length()).trim();
+                    stickyNote.setMessage(value);
+                    break;
+
                 default:
                     break;
             }
@@ -168,25 +174,40 @@ public class HttpRequest extends Thread {
 
             if (stickyNoteEntries.size() == 0)
                 return "No sticky note found.";
-            for (StickyNote x : stickyNoteEntries) {
-                message.append("_____________Retrieved_______________\n");
-                System.out.println(x.toString());
-                if(x.getColor().equals(stickyNote.getColor())){
-                    res= x.toString();
-                }
-                if(x.getX()==stickyNote.getX() && x.getY()==stickyNote.getY()){
-                    res= x.toString();
-                }
-                if(x.getName().equals(stickyNote.getName())){
-                    res= x.toString();
-                }
-                if(x.getName().equals(stickyNote.getName())){
-                    res= x.toString();
-                }
 
+            if (stickyNote.getMessage().equals("PINS")){
+                String val="";
+                for (int i=0;i<pinnedNotes.size()-1;i++){
+                    val+="x= " + pinnedNotes.get(i).toString() + " y= " + pinnedNotes.get(i+1).toString();
+
+                }
+                return  val;
+        }
+            else {
+
+                for (StickyNote x : stickyNoteEntries) {
+                    System.out.println(x.toString());
+
+                    if (x.getColor().equals(stickyNote.getColor())) {
+                        res = x.toString();
+                    }
+                    if (x.getX() == stickyNote.getX() && x.getY() == stickyNote.getY()) {
+                        res = x.toString();
+                    }
+                    if (x.getName().equals(stickyNote.getName())) {
+                        res = x.toString();
+                    }
+                    if (x.getName().equals(stickyNote.getName())) {
+                        res = x.toString();
+                    }
+
+
+                }
             }
-            if(res.length()!=0)return res;
+
+            if(res.length()!=0)return "_____________Retrieved_______________\n" + res;
             else  return "The Sticky note is not found";
+
     }
     private String handleClear() {
         stickyNoteEntries.clear();
