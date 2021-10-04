@@ -110,7 +110,7 @@ public class GUI extends JFrame {
                                 return;
 
                         } catch (NumberFormatException exception) {
-                                JOptionPane.showMessageDialog(this, "Invalid Inputs (Number must be string)", "Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this, "Invalid Inputs (Some inputs needs be an integer)", "Error", JOptionPane.ERROR_MESSAGE);
                         } catch (IOException exception) {
                                 exception.printStackTrace();
                         }
@@ -123,6 +123,8 @@ public class GUI extends JFrame {
         private void comboBoxRequestsHandler(ActionEvent e) {
 
         }
+
+
 
         private void renderContent() {
 
@@ -157,7 +159,7 @@ public class GUI extends JFrame {
                 panelLeft.add(panelRequest, BorderLayout.NORTH);
                 panelRequest.setLayout(new GridLayout(1, 0, 0, 0));
 
-                lblRequest = new JLabel("Request:");
+                lblRequest = new JLabel("REQUEST:");
                 panelRequest.add(lblRequest);
 
                 panelFields = new JPanel();
@@ -170,7 +172,7 @@ public class GUI extends JFrame {
                 panelTITLE = new JPanel();
                 panelFields.add(panelTITLE);
                 panelTITLE.setLayout(new GridLayout(0, 2, 0, 0));
-                lblTITLE = new JLabel("TITLE:");
+                lblTITLE = new JLabel("COLOR:");
                 panelTITLE.add(lblTITLE);
 
                 txtColor = new JTextField();
@@ -182,7 +184,7 @@ public class GUI extends JFrame {
                 panelFields.add(panelX);
                 panelX.setLayout(new GridLayout(0, 2, 0, 0));
 
-                lblX = new JLabel("X:");
+                lblX = new JLabel("X (integer):");
                 panelX.add(lblX);
 
                 txtX = new JTextField();
@@ -193,7 +195,7 @@ public class GUI extends JFrame {
                 panelFields.add(panelY);
                 panelY.setLayout(new GridLayout(0, 2, 0, 0));
 
-                lblY = new JLabel("Y:");
+                lblY = new JLabel("Y (integer):");
                 panelY.add(lblY);
 
                 txtY = new JTextField();
@@ -216,7 +218,7 @@ public class GUI extends JFrame {
                 panelFields.add(panelWidth);
                 panelWidth.setLayout(new GridLayout(0, 2, 0, 0));
 
-                lblWidth = new JLabel("WIDTH:");
+                lblWidth = new JLabel("WIDTH (integer):");
                 panelWidth.add(lblWidth);
 
                 txtWidth = new JTextField();
@@ -229,7 +231,7 @@ public class GUI extends JFrame {
                 panelFields.add(panelHeight);
                 panelHeight.setLayout(new GridLayout(0, 2, 0, 0));
 
-                lblHeight = new JLabel("HEIGHT:");
+                lblHeight = new JLabel("HEIGHT (integer):");
                 panelHeight.add(lblHeight);
 
                 txtHeight = new JTextField();
@@ -270,10 +272,6 @@ public class GUI extends JFrame {
                 txtOutput.setBorder(new EmptyBorder(0, 0, 500, 500));
                 panelOutput.setViewportView(txtOutput);
 
-                // Connect Button
-                btnConnect = new JButton("Connect ");
-                btnConnect.setEnabled(false);
-                panelHeader.add(btnConnect, BorderLayout.WEST);
 
                 // Disconnect Button
                 btnDisconnect = new JButton("Disconnect");
