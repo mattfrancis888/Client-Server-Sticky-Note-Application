@@ -118,6 +118,10 @@ public class HttpRequest extends Thread {
                  value = line.substring(words[0].length()).trim();
                     stickyNote.setHeight(Integer.parseInt(value));
                     break;
+                case "MESSAGE":
+                    value = line.substring(words[0].length()).trim();
+                    stickyNote.setMessage(value);
+                    break;
                 default:
                     break;
             }
