@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-public class ClientHandler {
+public class ClientHelper {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
@@ -21,7 +21,7 @@ public class ClientHandler {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         } catch (IOException exception) {
             exception.printStackTrace();
-            throw new IOException("ERROR: Connection refused please check IP Address and Port and try again");
+            throw new IOException("Failed to connect to server. Verify your IP Address and Port. Try again");
         }
     }
     public void disconnect() throws IOException {
@@ -32,8 +32,8 @@ public class ClientHandler {
 
     public boolean isConnected() {
         try {
-            out.println("ping");
-            return in.readLine().equals("pong");
+            out.println("connectTest");
+            return in.readLine().equals("connectServer");
         } catch (NullPointerException | IOException e) {
             return false;
         }

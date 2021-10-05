@@ -61,8 +61,8 @@ public class HttpRequest extends Thread {
             line = in.readLine();
             while (line != null) {
                 inMessage = "";
-                if (line.equals("ping")) {
-                    outMessage = "pong";
+                if (line.equals("connectTest")) {
+                    outMessage = "connectServer";
                 } else {
                     /* READ DATA START */
                     while (!line.contains("\\EOF")) {
