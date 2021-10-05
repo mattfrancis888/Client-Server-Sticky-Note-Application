@@ -7,10 +7,10 @@ import java.util.HashMap;
 public class StickyNote {
     @Override
     public String toString() {
-        return "COLOR: " + color +
+        return "color: " + color +
                 "\n x: " + x +
                 "\n y : " + y +
-                "\n Name: " + name +
+                "\n name: " + name +
                 "\n height: " + height +
                 "\n width: " + width +
                 "\n message: " + message +

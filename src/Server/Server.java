@@ -8,22 +8,21 @@ import java.util.*;
 public class Server {
 
 public static void main(String[] args) throws IOException {
-    int port;
-    if (args.length == 0) port = 3000;
-    else port = Integer.parseInt(args[0]);
+    int port=3000;
+    if (args.length> 0) port = Integer.parseInt(args[0]);
 
     ArrayList<StickyNote> stickyEntries = new ArrayList<StickyNote>();
     ArrayList<Integer>pinnedNotes=new ArrayList<Integer>();
-    ServerSocket serverSocket = new ServerSocket(port);
-    System.out.println("Server running on port " + port + ".");
+    ServerSocket socketServer = new ServerSocket(port);
+    System.out.println("The server is running on port " + port + ".");
 
     while (true) {
-        Socket clientSocket = serverSocket.accept();
+        Socket socketClient = socketServer.accept();
         HttpRequest serverThread = new HttpRequest(Thread.activeCount() + "",
-                clientSocket, stickyEntries,pinnedNotes);
+                socketClient, stickyEntries,pinnedNotes);
         serverThread.start();
-        System.out.println("Connection detected, starting server thread [" + (Thread.activeCount() - 1) + "]");
-        System.out.println("Active connections: " + (Thread.activeCount() - 1));
+        System.out.println("Connection is detected, the server is starting at thread [" + (Thread.activeCount() - 1) + "]");
+        System.out.println("The number of active connections are: " + (Thread.activeCount() - 1));
     }
 }
 }

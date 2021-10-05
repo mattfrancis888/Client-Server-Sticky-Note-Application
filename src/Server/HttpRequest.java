@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class HttpRequest extends Thread {
     private  Socket socket;
-    private BufferedReader in;
-    private PrintWriter out;
+    private BufferedReader input;
+    private PrintWriter output;
     private  ArrayList<StickyNote> stickyNoteEntries;
     private ArrayList<Integer>pinnedNotes;
 
@@ -25,8 +25,8 @@ public class HttpRequest extends Thread {
 
     public void run() {
         try {
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
+            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            output = new PrintWriter(socket.getOutputStream(), true);
             listen();
            disconnect();
         } catch (IOException e) {
@@ -56,70 +56,75 @@ public class HttpRequest extends Thread {
     }
 
     private void listen() {
-        String line, inMessage, outMessage;
+        String sentence, messageInput, messageOutput;
         try {
-            line = in.readLine();
-            while (line != null) {
-                inMessage = "";
-                if (line.equals("connectTest")) {
-                    outMessage = "connectServer";
+            sentence = input.readLine();
+            while (sentence != null) {
+                messageInput = "";
+                if (sentence.equals("connectTest")) {
+                    messageOutput = "connectServer";
                 } else {
-                    /* READ DATA START */
-                    while (!line.contains("\\EOF")) {
-                        inMessage = inMessage.concat(line + "\r\n");
-                        line = in.readLine();
+                    while (!sentence.contains("\\EOF")) {
+                        messageInput = messageInput.concat(sentence + "\r\n");
+                        sentence = input.readLine();
                     }
-                    /* READ DATA END */
 
-                    /* PROCESS DATA START*/
-                    outMessage = processData(inMessage.split("\n")).trim() + "\r\n\\EOF";
+                    messageOutput = processData(messageInput.split("\n")).trim() + "\r\n\\EOF";
                 }
-                out.println(outMessage);
-                line = in.readLine();
+                output.println(messageOutput);
+                sentence = input.readLine();
             }
-        } catch (IOException exception) {
-            exception.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+    private void disconnect() throws IOException {
+        output.close();
+        input.close();
+        socket.close();
+        System.out.println("The server thread ["+getName()+"] has been disconnected.");
+        System.out.println("The number of active  connections are: " + (Thread.activeCount() - 2));
+        this.interrupt();
     }
 
 
     //handle stuff
     private String handlePost(String[] data) {
-        String message;
+
         StickyNote stickyNote = new StickyNote();
-        for (String line : data) {
-            line = line.trim();
-            String[] words = line.split(" ");
+        String message;
+        for (String s : data) {
+            s = s.trim();
+            String[] strings = s.split(" ");
+            System.out.println("POST: " + strings[0] + " ");
             String value;
-            System.out.println("HANDLE POST: " + words[0] + " ");
-            switch (words[0]) {
+            switch (strings[0]) {
                 case "COLOR":
-                    value = line.substring(words[0].length()).trim();
-                    System.out.println("SET "  + value);
+                    value = s.substring(strings[0].length()).trim();
                     stickyNote.setColor(value);
                     break;
                 case "X":
-                    value = line.substring(words[0].length()).trim();
+                    value = s.substring(strings[0].length()).trim();
                     stickyNote.setX(Integer.parseInt(value));
                     break;
                 case "Y":
-                    value = line.substring(words[0].length()).trim();
+                    value = s.substring(strings[0].length()).trim();
                     stickyNote.setY(Integer.parseInt(value));
                     break;
                 case "NAME":
-                    value = line.substring(words[0].length()).trim();
+                    value = s.substring(strings[0].length()).trim();
                     stickyNote.setName(value);
                     break;
                 case "WIDTH":
-                   value = line.substring(words[0].length()).trim();
+                    value = s.substring(strings[0].length()).trim();
                     stickyNote.setWidth(Integer.parseInt(value));
                     break;
                 case "HEIGHT":
-                 value = line.substring(words[0].length()).trim();
+                    value = s.substring(strings[0].length()).trim();
                     stickyNote.setHeight(Integer.parseInt(value));
                     break;
                 case "MESSAGE":
-                    value = line.substring(words[0].length()).trim();
+                    value = s.substring(strings[0].length()).trim();
                     stickyNote.setMessage(value);
                     break;
                 default:
@@ -127,7 +132,7 @@ public class HttpRequest extends Thread {
             }
         }
         stickyNoteEntries.add(stickyNote);
-        message = "-----Successfully added-----\n" + stickyNoteEntries.get(
+        message = "Inserted the notes successfully\n" + stickyNoteEntries.get(
                 stickyNoteEntries.size() - 1);
 
         return message;
@@ -135,38 +140,36 @@ public class HttpRequest extends Thread {
 
 
     private String handleGet(String[] data) {
-        StringBuilder message = new StringBuilder();
         StickyNote stickyNote = new StickyNote();
         String res="";
-        for (String line : data) {
+        for (String s : data) {
 
-            line = line.trim();
-            String[] words = line.split(" ");
+            s = s.trim();
+            String[] words = s.split(" ");
             String value;
-            System.out.println("HANDLE GET: " + words[0] + " ");
+            System.out.println("GET: " + words[0] + " ");
             switch (words[0]) {
                 case "COLOR":
-                    value = line.substring(words[0].length()).trim();
+                    value = s.substring(words[0].length()).trim();
                     stickyNote.setColor(value);
                     break;
                 case "X":
-                    value = line.substring(words[0].length()).trim();
+                    value = s.substring(words[0].length()).trim();
                     stickyNote.setX(Integer.parseInt(value));
                     break;
                 case "Y":
-                    value = line.substring(words[0].length()).trim();
+                    value = s.substring(words[0].length()).trim();
                     stickyNote.setY(Integer.parseInt(value));
                     break;
 
                 case "NAME":
-                    value = line.substring(words[0].length()).trim();
+                    value = s.substring(words[0].length()).trim();
                     stickyNote.setName(value);
                     break;
                 case "MESSAGE":
-                    value = line.substring(words[0].length()).trim();
+                    value = s.substring(words[0].length()).trim();
                     stickyNote.setMessage(value);
                     break;
-
                 default:
                     break;
             }
@@ -177,8 +180,8 @@ public class HttpRequest extends Thread {
 
             if (stickyNote.getMessage().equals("PINS")){
                 String val="";
-                for (int i=0;i<pinnedNotes.size()-1;i++){
-                    val+="x= " + pinnedNotes.get(i).toString() + " y= " + pinnedNotes.get(i+1).toString();
+                for (int i=0;i<pinnedNotes.size()-1;i+=2){
+                    val+="x=" + pinnedNotes.get(i).toString() + " and y=" + pinnedNotes.get(i+1).toString() +".\n";
 
                 }
                 return  val;
@@ -205,7 +208,7 @@ public class HttpRequest extends Thread {
                 }
             }
 
-            if(res.length()!=0)return "_____________Retrieved_______________\n" + res;
+            if(res.length()!=0)return "Retrieved the note\n" + res;
             else  return "The Sticky note is not found";
 
     }
@@ -216,19 +219,19 @@ public class HttpRequest extends Thread {
 
     private String handlePin(String[]data) {
         StickyNote stickyNote = new StickyNote();
-        for (String line : data) {
-            line = line.trim();
-            String[] words = line.split(" ");
+        for (String s : data) {
+            s = s.trim();
+            String[] strings = s.split(" ");
             String value;
-            if (words[0].equals("X")) {//x value will be set here
-                System.out.println("HANDLE PIN: " + words[0] + " ");
-                value = line.substring(words[0].length()).trim();
+            if (strings[0].equals("X")) {//x value will be set here
+                System.out.println("PIN: " + strings[0] + " ");
+                value = s.substring(strings[0].length()).trim();
                 stickyNote.setX(Integer.parseInt(value));
 
             }
-            if (words[0].equals("Y"))  {//y value will be set here
-                System.out.println("HANDLE PIN: " + words[0] + " ");
-                value = line.substring(words[0].length()).trim();
+            if (strings[0].equals("Y"))  {//y value will be set here
+                System.out.println("PIN: " + strings[0] + " ");
+                value = s.substring(strings[0].length()).trim();
                 stickyNote.setY(Integer.parseInt(value));
 
             }
@@ -241,7 +244,7 @@ public class HttpRequest extends Thread {
             if (xt == stickyNote.getX() && yt == stickyNote.getY()) {
                 pinnedNotes.add(stickyNote.getX());
                 pinnedNotes.add(stickyNote.getY());
-                return "The sticky note at x= " + stickyNote.getX() + " and y= " + stickyNote.getY() + " has been pinned";
+                return "The sticky note at x=" + stickyNote.getX() + " and y=" + stickyNote.getY() + " has been pinned";
             }
         }
 
@@ -251,24 +254,24 @@ public class HttpRequest extends Thread {
     private String handleUnpin(String[]data) {
         boolean flag=false;
         StickyNote stickyNote = new StickyNote();
-        for (String line : data) {
-            line = line.trim();
-            String[] words = line.split(" ");
+        for (String s : data) {
+            s = s.trim();
+            String[] strings = s.split(" ");
             String value;
-            if (words[0].equals("X")) {
-                System.out.println("HANDLE UNPIN: " + words[0] + " ");
-                value = line.substring(words[0].length()).trim();
+            if (strings[0].equals("X")) {
+                System.out.println("UNPIN: " + strings[0] + " ");
+                value = s.substring(strings[0].length()).trim();
                 stickyNote.setX(Integer.parseInt(value));
 
             }
-            if (words[0].equals("Y"))  {
-                System.out.println("HANDLE UNPIN: " + words[0] + " ");
-                value = line.substring(words[0].length()).trim();
+            if (strings[0].equals("Y"))  {
+                System.out.println("UNPIN: " + strings[0] + " ");
+                value = s.substring(strings[0].length()).trim();
                 stickyNote.setY(Integer.parseInt(value));
 
             }
         }
-        for (int i = 0; i < pinnedNotes.size() - 1; i++) {//checks if coordinates exist and removes from pinlist
+        for (int i = 0; i < pinnedNotes.size() - 1; i+=2) {//checks if coordinates exist and removes from pinlist
             if (pinnedNotes.get(i) == stickyNote.getX() && pinnedNotes.get(i + 1) == stickyNote.getY()) {
                 pinnedNotes.remove(i + 1);
                 pinnedNotes.remove(i);
@@ -289,27 +292,20 @@ public class HttpRequest extends Thread {
             StickyNote curr=stickyNoteEntries.get(i);
             x=curr.getX();
             y=curr.getY();
-            for (int j = 0; j < pinnedNotes.size() - 1; j++) {
+            for (int j = 0; j < pinnedNotes.size() - 1; j+=2) {
                 if (pinnedNotes.get(j) == x && pinnedNotes.get(j + 1) == y) {
                     flag = true;
                 }
             }
             if(!flag){
                 stickyNoteEntries.remove(i);
-                return "Unpinned note removed at x=" + x+ " and y= " + y;
+                return "Unpinned note removed at x=" + x+ " and y=" + y;
             }
         }
         return "No more unpinned notes left";
     }
 
 
-    private void disconnect() throws IOException {
-        out.close();
-        in.close();
-        socket.close();
-        System.out.println("Server thread [" + getName() + "] disconnected.");
-        System.out.println("Active connections: " + (Thread.activeCount() - 2));
-        this.interrupt();
-    }
+
 
 }
