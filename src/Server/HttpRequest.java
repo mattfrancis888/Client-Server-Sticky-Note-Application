@@ -286,7 +286,8 @@ public class HttpRequest extends Thread {
     private String handleShake(String[]data) {
        int x=0;
        int y=0;
-        boolean flag=false;
+       String ret="";
+        boolean flag;
         for (int i = 0; i < stickyNoteEntries.size(); i++) {
             flag=false;
             StickyNote curr=stickyNoteEntries.get(i);
@@ -295,14 +296,20 @@ public class HttpRequest extends Thread {
             for (int j = 0; j < pinnedNotes.size() - 1; j+=2) {
                 if (pinnedNotes.get(j) == x && pinnedNotes.get(j + 1) == y) {
                     flag = true;
+                    break;
                 }
             }
-            if(!flag){
+            if(flag==false){
                 stickyNoteEntries.remove(i);
-                return "Unpinned note removed at x=" + x+ " and y=" + y;
+                ret+= "Unpinned note removed at x=" + x+ " and y=" + y + "\n";
+                i-=1;
+
             }
+            System.out.print("Dasdsadsa " + flag);
         }
-        return "No more unpinned notes left";
+
+        if(ret.equals("")) return "All notes are pinned";
+        else return ret;
     }
 
 
