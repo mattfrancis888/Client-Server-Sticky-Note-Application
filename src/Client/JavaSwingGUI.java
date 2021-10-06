@@ -134,42 +134,42 @@ public class JavaSwingGUI extends JFrame {
                 // Handle All Get request
 //                                if (e.getSource() == btnSend) {
 //                                        System.out.println("BTN GET CLICKED");
-//                                        txtOutput.setText(clientHandler.sendMessage(Request.GET, "test"));
+//                                        txtOutput.setText(clientHandler.sendData(Request.GET, "test"));
 //                                } else if(e.getSource() == btnPost) {
 //                                        System.out.println("BTN POST CLICKED");
-//                                        txtOutput.setText(clientHandler.sendMessage(Request.POST, "test"));
+//                                        txtOutput.setText(clientHandler.sendData(Request.POST, "test"));
 //                                }else if (e.getSource()==btnClear){
 //                                        System.out.println("BTN CLEAR CLICKED");
-//                                        txtOutput.setText(clientHandler.sendMessage(Request.CLEAR, "test"));
+//                                        txtOutput.setText(clientHandler.sendData(Request.CLEAR, "test"));
 //                                }
 
 
                 if (comboBoxRequests.getSelectedItem() == Request.GET) {
                     System.out.println("COMBO BOX GET CLICKED " + COLOR);
 
-                    txtOutput.setText(clientHelper.sendMessage(Request.GET, COLOR,X,Y, NAME, WIDTH, HEIGHT,MESSAGE));
+                    txtOutput.setText(clientHelper.sendData(Request.GET, COLOR,X,Y, NAME, WIDTH, HEIGHT,MESSAGE));
 
                 }
                 if (comboBoxRequests.getSelectedItem() == Request.POST) {
                     System.out.println("BTN POST CLICKED " + WIDTH + " " +  HEIGHT);
-                    txtOutput.setText(clientHelper.sendMessage(Request.POST, COLOR,X,Y, NAME, WIDTH, HEIGHT, MESSAGE));
+                    txtOutput.setText(clientHelper.sendData(Request.POST, COLOR,X,Y, NAME, WIDTH, HEIGHT, MESSAGE));
                 }
                 if (comboBoxRequests.getSelectedItem() == Request.CLEAR) {
                     System.out.println("BTN CLEAR CLICKED");
 
-                    txtOutput.setText(clientHelper.sendMessage(Request.CLEAR, COLOR,X,Y, NAME, WIDTH, HEIGHT,MESSAGE));
+                    txtOutput.setText(clientHelper.sendData(Request.CLEAR, COLOR,X,Y, NAME, WIDTH, HEIGHT,MESSAGE));
                 }
                 if (comboBoxRequests.getSelectedItem() == Request.PIN) {
                     System.out.println("BTN PIN CLICKED");
-                    txtOutput.setText(clientHelper.sendMessage(Request.PIN, COLOR,X,Y, NAME, WIDTH, HEIGHT,MESSAGE));
+                    txtOutput.setText(clientHelper.sendData(Request.PIN, COLOR,X,Y, NAME, WIDTH, HEIGHT,MESSAGE));
                 }
                 if (comboBoxRequests.getSelectedItem() == Request.UNPIN) {
                     System.out.println("BTN UNPIN CLICKED");
-                    txtOutput.setText(clientHelper.sendMessage(Request.UNPIN, COLOR,X,Y, NAME, WIDTH, HEIGHT,MESSAGE));
+                    txtOutput.setText(clientHelper.sendData(Request.UNPIN, COLOR,X,Y, NAME, WIDTH, HEIGHT,MESSAGE));
                 }
                 if (comboBoxRequests.getSelectedItem() == Request.SHAKE) {
                     System.out.println("BTN SHAKE CLICKED");
-                    txtOutput.setText(clientHelper.sendMessage(Request.SHAKE, COLOR, X, Y, NAME, WIDTH, HEIGHT, MESSAGE));
+                    txtOutput.setText(clientHelper.sendData(Request.SHAKE, COLOR, X, Y, NAME, WIDTH, HEIGHT, MESSAGE));
 
                 }
                 connectFlag = false;

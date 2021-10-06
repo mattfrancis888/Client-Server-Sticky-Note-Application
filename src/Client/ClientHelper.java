@@ -38,7 +38,7 @@ public class ClientHelper {
             return false;
         }
     }
-    private String processRequest(Request request, String color, int x, int y, String name, int width, int height, String message) {
+    private String handleRequest(Request request, String color, int x, int y, String name, int width, int height, String message) {
         String requestData = request.name() + "\r\n";
 
         requestData += "COLOR " + color +  "\r\n" + "X " + x +  "\r\n" + "Y " + y + "\r\n" +
@@ -47,11 +47,11 @@ public class ClientHelper {
         return requestData;
     }
 
-    public String sendMessage(Request request, String color, int x, int y, String name, int width, int height,String message)  throws IOException {
+    public String sendData(Request request, String color, int x, int y, String name, int width, int height,String message)  throws IOException {
 
-        String requestData = processRequest(request, color, x,y,name,width,height, message);
+        String requestData = handleRequest(request, color, x,y,name,width,height, message);
         System.out.println("color is: " + color);
-        System.out.println("sendMessage: "  + requestData);
+        System.out.println("sendData: "  + requestData);
        out.println(requestData + "\r\n\\EOF");
 
         String response = "";
