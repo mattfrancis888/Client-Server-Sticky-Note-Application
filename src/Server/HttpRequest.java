@@ -308,8 +308,8 @@ public class HttpRequest extends Thread {
             System.out.print("Dasdsadsa " + flag);
         }
 
-        if(ret.equals("")) return "All notes are pinned";
-        else return ret;
+        if(ret.equals("")) ret+="All/one or more notes are pinned";
+        return ret;
     }
 
 
